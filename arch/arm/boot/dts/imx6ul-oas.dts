@@ -61,11 +61,7 @@
 		LED1 {
 			gpios = <&gpio3 7 GPIO_ACTIVE_HIGH>;
 			default-state = "off";
-		};
-
-		LED2 {
-			gpios = <&gpio3 8 GPIO_ACTIVE_HIGH>;
-			default-state = "off";
+			linux,default-trigger = "can0-rxtx";
 		};
 
 		LED3 { // Controlled by hlp_main
@@ -96,6 +92,16 @@
 			panic-indicator;
 		};
 	};
+};
+
+&gpio3 {
+    gpio-line-names = "test1","test2";
+    led2 {
+        gpio-hog;
+        gpios = <8 GPIO_ACTIVE_HIGH>;
+        output-high;
+        line-name = "foo-bar-gpio";
+    };
 };
 
 &can1 {
